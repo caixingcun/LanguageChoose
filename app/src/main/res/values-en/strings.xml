@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">webview debug</string>
+    <string name="string_full_screen">full screen</string>
+    <string name="string_no_full_screen">no full screen</string>
+    <string name="string_please_input_debug_address">please input debug url</string>
+    <string name="string_start_debug">start debug</string>
+    <string name="string_conform">conform</string>
+</resources>

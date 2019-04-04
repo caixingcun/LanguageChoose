@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">H5调试</string>
+    <string name="string_full_screen">全屏</string>
+    <string name="string_no_full_screen">非全屏</string>
+    <string name="string_please_input_debug_address">请输入需要调试页面的地址</string>
+    <string name="string_start_debug">开始调试</string>
+    <string name="string_conform">确定</string>
+</resources>
