@@ -47,7 +47,7 @@ public class LanguageDelegate {
      * @param context
      * @return
      */
-    private  Locale getCurrentLanguageLocale(Context context) {
+    public Locale getCurrentLanguageLocale(Context context) {
         String country = SpConstants.getCountry(context);
 
         if (TextUtils.isEmpty(country)) {
@@ -62,7 +62,7 @@ public class LanguageDelegate {
      *
      * @return Locale对象
      */
-    private  Locale getSystemLocale(Context context) {
+    private Locale getSystemLocale(Context context) {
         Locale locale;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             locale = LocaleList.getDefault().get(0);
@@ -78,7 +78,7 @@ public class LanguageDelegate {
      * @param context 上下文
      * @return 更新资源后的上下文
      */
-    public  Context upDataLocate(Context context) {
+    public Context upDataLocate(Context context) {
         Locale locale = getCurrentLanguageLocale(context);
         Locale.setDefault(locale);
         Resources res = context.getResources();
@@ -100,7 +100,7 @@ public class LanguageDelegate {
      * @param context 上下文
      * @return
      */
-    public  boolean switchLanguage(Context context, String language) {
+    public boolean switchLanguage(Context context, String language) {
         String country = SpConstants.getCountry(context);
         if (language.equals(country)) {
             return false;
@@ -113,7 +113,7 @@ public class LanguageDelegate {
     /**
      * 设置语言类型
      */
-    private  void setApplicationLanguage(Context context) {
+    private void setApplicationLanguage(Context context) {
         Resources resources = context.getApplicationContext().getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
