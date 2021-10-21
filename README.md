@@ -1,7 +1,7 @@
 # LanguageChoose 国际化简单封装
 
 
-## ------------------------------- version 1.0 . without application extends
+# ------------------------------- version 2.0 . without application extends
 
 # 2.1 dependencies
 ~~~
