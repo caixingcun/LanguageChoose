@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.attachBaseContext(LanguageDelegate.getInstance().upDataLocate(newBase));
     }
 
-    private RadioButton rbChinese;
-    private RadioButton rbTChinese;
-    private RadioButton rbEnglish;
     private Activity mActivity;
 
     @Override
@@ -27,35 +24,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mActivity = this;
-        rbChinese = (RadioButton) findViewById(R.id.rb_chinese);
-        rbTChinese = (RadioButton) findViewById(R.id.rb_t_chinese);
-        rbEnglish = (RadioButton) findViewById(R.id.rb_english);
-        findViewById(R.id.btn_conform).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.rb_chinese).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (rbChinese.isChecked()) {
-                    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[0]);
-                    startActivity(new Intent(mActivity,MainActivity.class));
-                    finish();
-                    return;
-                }
-                if (rbTChinese.isChecked()) {
-                    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[1]);
-                    startActivity(new Intent(mActivity,MainActivity.class));
-                    finish();
-                    return;
-                }
-                if (rbEnglish.isChecked()) {
-                    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[3]);
-                    startActivity(new Intent(mActivity,MainActivity.class));
-                    finish();
-                    return;
-                }
-
+                LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[0]);
+                recreate();
             }
         });
-
+        findViewById(R.id.rb_t_chinese).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[1]);
+                recreate();
+            }
+        });
+        findViewById(R.id.rb_english).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[3]);
+                recreate();
+            }
+        });
 
         final EditText et = findViewById(R.id.et);
         final RadioButton rb = findViewById(R.id.rb1);
@@ -64,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         boolean fullScreen = rb.isChecked();
-
                         Intent intent;
                         if (fullScreen) {
                             intent = new Intent(MainActivity.this, FullScreenWebViewActivity.class);

@@ -29,18 +29,19 @@
     public static String[] languages = {"CN", "HK", "TW", "EN"};
     public static Locale[] locates = {Locale.CHINA, Locale.TRADITIONAL_CHINESE, Locale.TAIWAN, Locale.ENGLISH};
 
+    static {
+          LanguageDelegate.getInstance().init(Arrays.asList(languages),Arrays.asList(locates));
+    }
     // oncreate init languages
     @Override
     public void onCreate() {
         super.onCreate();
-        LanguageDelegate.getInstance().init(Arrays.asList(languages),Arrays.asList(locates));
     }
     
     
     @Override
     protected void attachBaseContext(Context base) {
-        LanguageDelegate.getInstance().upDataLocate(base);
-        super.attachBaseContext(base);
+        super.attachBaseContext(LanguageDelegate.getInstance().upDataLocate(base));
     }
     
     // when config changed ，update language 
@@ -56,12 +57,13 @@
    // update config in switch page 
      @Override
     protected void attachBaseContext(Context newBase) {
-        LanguageDelegate.getInstance().upDataLocate(newBase)
-        super.attachBaseContext(newBase);
+        super.attachBaseContext(LanguageDelegate.getInstance().upDataLocate(newBase));
     }
    
     // switch 
     LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[3]);
+    recreate();
+    //需要通知所有存在的页面 recreate() 并重写 其 attachBaseContext，也可以重写BaseActivity的 attachBaseContext 
 ~~~
 
 

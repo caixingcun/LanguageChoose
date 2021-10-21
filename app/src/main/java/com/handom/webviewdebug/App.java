@@ -15,10 +15,13 @@ public class App extends Application {
     public static String[] languages = {"CN", "HK", "TW", "EN"};
     public static Locale[] locates = {Locale.CHINA, Locale.TRADITIONAL_CHINESE, Locale.TAIWAN, Locale.ENGLISH};
 
+    static {
+        LanguageDelegate.getInstance().init(Arrays.asList(languages), Arrays.asList(locates));
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        LanguageDelegate.getInstance().init(Arrays.asList(languages),Arrays.asList(locates));
     }
 
     @Override
