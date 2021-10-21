@@ -17,7 +17,7 @@
 	app  build.gradle
   
   	dependencies {
-	        implementation 'com.github.caixingcun:LanguageChoose:v2.0'
+	        implementation 'com.github.caixingcun:LanguageChoose:v2.1'
 	}
 ~~~
 
