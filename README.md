@@ -1,9 +1,75 @@
-# LanguageChoose
-国际化简单封装
+# LanguageChoose 国际化简单封装
 
 
-1.添加依赖
-Android Studio 导入
+## ------------------------------- version 1.0 . without application extends
+
+# 2.1 dependencies
+~~~
+   project build.gradle 
+   
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://www.jitpack.io' }
+		}
+	}
+	
+	app  build.gradle
+  
+  	dependencies {
+	        implementation 'com.github.caixingcun:LanguageChoose:1.0'
+	}
+~~~
+
+# 2.2 init in Application
+~~~
+    	
+    // define your language resource package
+    
+    public static String[] languages = {"CN", "HK", "TW", "EN"};
+    public static Locale[] locates = {Locale.CHINA, Locale.TRADITIONAL_CHINESE, Locale.TAIWAN, Locale.ENGLISH};
+
+    // oncreate init languages
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        LanguageDelegate.getInstance().init(Arrays.asList(languages),Arrays.asList(locates));
+    }
+    
+    
+    @Override
+    protected void attachBaseContext(Context base) {
+        LanguageDelegate.getInstance().upDataLocate(base);
+        super.attachBaseContext(base);
+    }
+    
+    // when config changed ，update language 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LanguageDelegate.getInstance().upDataLocate(this);
+    }
+~~~
+
+# 2.3 switch language
+~~~
+   // update config in switch page 
+     @Override
+    protected void attachBaseContext(Context newBase) {
+        LanguageDelegate.getInstance().upDataLocate(newBase)
+        super.attachBaseContext(newBase);
+    }
+   
+    // switch 
+    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[3]);
+~~~
+
+
+
+##---------------------------- version 1.0 . need extends application
+
+# 1.添加依赖  Android Studio 导入
+~~~
   Project下build.gradle
   allprojects {
 		repositories {
@@ -12,16 +78,18 @@ Android Studio 导入
 		}
 	}
   
-  app 下build.gradle
+  app build.gradle
   
   	dependencies {
 	        implementation 'com.github.caixingcun:LanguageChoose:1.0'
 	}
+~~~
   
-2. 创建Application 继承  LanguageBaseApp
+# 2. create Application extends  LanguageBaseApp
   
-  在Application 下 实现静态代码块，初始化 自己资源包中创建的几个 values包 
-  
+~~~
+    // create locates depend on your language resource package
+    
     public static String[] languages = {"CN", "HK", "TW", "EN"};
     public static Locale[] locates = {Locale.CHINA, Locale.TRADITIONAL_CHINESE, Locale.TAIWAN, Locale.ENGLISH};
 
@@ -30,19 +98,32 @@ Android Studio 导入
         setmLocates(Arrays.asList(locates));
     }
     
-3.BaseActivity 中重写 attachBaseContext 方法
+~~~
+
+# 3. in switch page ,override attachBaseContext 
+~~~
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LanguageUtil.upDataLocate(newBase));
     }
+~~~
  
- 4.切换语言 代码
-    LanguageUtil.switchLanguage(mActivity, App.languages[0]);  //这里选择了 Application 初始化的第一种语言
+#  4.switch language
+~~~
+    // switch language 
+    LanguageUtil.switchLanguage(mActivity, App.languages[0]); 
     
-    因为需要重新渲染页面，需要刷新当前界面
+    // restart your page to reconfig your resource
       startActivity(new Intent(mActivity,MainActivity.class));
       finish();
+~~~
 
   
   
+
+
+
+
+
+
   

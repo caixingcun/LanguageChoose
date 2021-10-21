@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.caixingcun.languagechoose.util.LanguageUtil;
+import com.caixingcun.languagechoose.LanguageDelegate;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LanguageUtil.upDataLocate(newBase));
+        super.attachBaseContext(LanguageDelegate.getInstance().upDataLocate(newBase));
     }
 
     private RadioButton rbChinese;
@@ -36,19 +35,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (rbChinese.isChecked()) {
-                    LanguageUtil.switchLanguage(mActivity, App.languages[0]);
+                    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[0]);
                     startActivity(new Intent(mActivity,MainActivity.class));
                     finish();
                     return;
                 }
                 if (rbTChinese.isChecked()) {
-                    LanguageUtil.switchLanguage(mActivity, App.languages[1]);
+                    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[1]);
                     startActivity(new Intent(mActivity,MainActivity.class));
                     finish();
                     return;
                 }
                 if (rbEnglish.isChecked()) {
-                    LanguageUtil.switchLanguage(mActivity, App.languages[3]);
+                    LanguageDelegate.getInstance().switchLanguage(mActivity, App.languages[3]);
                     startActivity(new Intent(mActivity,MainActivity.class));
                     finish();
                     return;
